@@ -17,15 +17,12 @@ function fetchCounteries(name){
         return response.json();
     })
     .then(countries => {
-        while($countryList.firstChild){
-            $countryList.removeChild($countryList.firstChild);
-        }
         console.log(countries);
         let $countryName = null;
         if(countries.length === 1){
             $countryName = document.createElement("li");
             $countryName.textContent = countries[0].name;
-            $countryList.style.listStyle = `url("${countries[0].flags.svg}")`;
+            $countryName.style.listStyle = `url("${countries[0].flags.svg}")`;
             $countryList.append($countryName);
         }
         // for(const country of countries){
@@ -38,13 +35,11 @@ function fetchCounteries(name){
 }
 
 $searchBox.addEventListener("input", _.debounce((ev) => {
-    if(ev.target.value !== null){
+    if(ev.target.value !== ""){
     fetchCounteries(ev.target.value.trim());
-    }
-    else{
-        for(const $element of $countryList.children){
-            $element.remove();
+    }else{
+        while($countryList.firstChild){
+            $countryList.removeChild($countryList.firstChild);
         }
-        $countryInfo.firstElementChild.remove();
     }
 }, DEBOUNCE_DELAY));
