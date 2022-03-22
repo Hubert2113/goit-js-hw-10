@@ -1,7 +1,6 @@
 "use strict"
 import './css/styles.css';
 import _ from 'lodash';
-import notiflix from "Notiflix"
 import Notiflix from 'Notiflix';
 
 const $searchBox = document.querySelector("#search-box");
